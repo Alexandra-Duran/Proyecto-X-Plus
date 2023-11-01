@@ -1,0 +1,10 @@
+.nav-pills li a:hover{
+    background-color: greenyellow;
+}
+#menu{
+    background-color: azure;
+}
+
+.example-spacer{
+    flex: 1 1 auto;
+}
