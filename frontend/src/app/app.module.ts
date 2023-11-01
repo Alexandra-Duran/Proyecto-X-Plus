@@ -9,11 +9,19 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule} from '@angular/material/button';
 import { MatDialogModule} from '@angular/material/dialog';
+import { CargoComponent } from './vista/cargo/cargo.component';
+import { NavbarComponent } from './vista/navbar/navbar.component';
+import { MenuComponent } from './vista/menu/menu.component';
+import { FooterComponent } from './vista/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlantillaComponent
+    PlantillaComponent,
+    CargoComponent,
+    NavbarComponent,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
