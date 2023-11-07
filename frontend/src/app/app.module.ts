@@ -13,6 +13,7 @@ import { CargoComponent } from './vista/cargo/cargo.component';
 import { NavbarComponent } from './vista/navbar/navbar.component';
 import { MenuComponent } from './vista/menu/menu.component';
 import { FooterComponent } from './vista/footer/footer.component';
+import { IngresarComponent } from './ingresar/ingresar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from './vista/footer/footer.component';
     CargoComponent,
     NavbarComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    IngresarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+.withlogo{
+    width: 10%;
+}
+
+.titleone {
+    font-weight: bold;
+
+}
+
+.nav{
+    border: 2px solid black;
+}
+/* .sistema{
+   
+} */
+
+.bgboton{
+    margin-top: 20px;
+    width: 20%;
+    height: 100%;
+    padding: 3%;
+    background-color: rgb(197, 194, 194);
+}
+
+.buttonr {
+    background-color: rgb(197, 194, 194);
+    border: none;
+}
+
+.borde {
+    border-right: 2px solid black;
+}
