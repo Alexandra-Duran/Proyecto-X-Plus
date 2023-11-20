@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamp('asi_salida')->nullable();
             $table->string('asi_estado');
             $table->unsignedBigInteger('usu_id');
-            $table->foreign('usu_id')->references('id')->on('usuarios');
+            $table->foreign('usu_id')->references('id')->on('users');
             $table->unsignedBigInteger('eve_id');
             $table->foreign('eve_id')->references('id')->on('eventos');
             $table->timestamps();

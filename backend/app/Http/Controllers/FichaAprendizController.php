@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\user;
+use App\Models\ficha_aprendiz;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class FichaAprendizController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +34,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user $user)
+    public function show(ficha_aprendiz $ficha_aprendiz)
     {
         //
     }
@@ -43,7 +42,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user $user)
+    public function edit(ficha_aprendiz $ficha_aprendiz)
     {
         //
     }
@@ -51,7 +50,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user $user)
+    public function update(Request $request, ficha_aprendiz $ficha_aprendiz)
     {
         //
     }
@@ -59,7 +58,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user $user)
+    public function destroy(ficha_aprendiz $ficha_aprendiz)
     {
         //
     }

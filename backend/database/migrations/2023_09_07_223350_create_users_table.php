@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('usu_contraseña');
-            $table->string('usu_nombre');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->string('usu_estado');
-            $table->unsignedBigInteger('car_id');
-            $table->foreign('car_id')->references('id')->on('cargos');
             $table->string('per_id');
             $table->foreign('per_id')->references('per_documento')->on('personas');
-            $table->string('for_id');
-            $table->foreign('for_id')->references('for_ficha')->on('formacions');
+            $table->unsignedBigInteger('car_id');
+            $table->foreign('car_id')->references('id')->on('cargos');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('users');
     }
 };

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +15,9 @@ import { CargoComponent } from './vista/cargo/cargo.component';
 import { NavbarComponent } from './vista/navbar/navbar.component';
 import { MenuComponent } from './vista/menu/menu.component';
 import { FooterComponent } from './vista/footer/footer.component';
-import { IngresarComponent } from './ingresar/ingresar.component';
+import { LoginComponent } from './login/login.component';
+import { CarnetComponent } from './vista/carnet/carnet.component';
+import { PersonasComponent } from './vista/personas/personas.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { IngresarComponent } from './ingresar/ingresar.component';
     NavbarComponent,
     MenuComponent,
     FooterComponent,
-    IngresarComponent
+    LoginComponent,
+    CarnetComponent,
+    PersonasComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,9 @@ import { IngresarComponent } from './ingresar/ingresar.component';
     MatToolbarModule,
     MatIconModule,
     MatDialogModule,
-   
+    HttpClientModule,
+    ReactiveFormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="input-group mb-3">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="button" class="btn btn-outline-primary">Search</button>
+        </div>
+    
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
+        <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="crearModalLabel">Formulario Persona</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Contenido del formulario o lo que desees poner dentro del modal -->
+                        <!-- Ejemplo de formulario -->
+                        <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+                            <div class="mb-3">
+                                <label for="per_documento" class="form-label">NDI</label>
+                                <input type="number" class="form-control" id="per_documento" formControlName="per_documento">
+                            </div>
+                            <!-- Agrega más campos según sea necesario -->
+                            <div class="mb-3">
+                                <label for="per_tipodoc" class="form-label">Tipo Doc</label>
+                                <input type="text" class="form-control" id="per_tipodoc" formControlName="per_tipodoc">
+                            </div>
+                            <div class="mb-3">
+                                <label for="per_nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="per_nombre" formControlName="per_nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="per_apellido" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" id="per_apellido" formControlName="per_apellido">
+                            </div>
+                            <div class="mb-3">
+                                <label for="per_telefono" class="form-label">Tel</label>
+                                <input type="number" class="form-control" id="per_telefono" formControlName="per_telefono">
+                            </div>
+                            <div class="mb-3">
+                                <label for="per_email" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="per_email" formControlName="per_email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="per_genero" class="form-label">Genero</label>
+                                <input type="text" class="form-control" id="per_genero" formControlName="per_genero">
+                            </div>
+                            <div class="mb-3">
+                                <label for="per_foto" class="form-label">Foto</label>
+                                <input type="text" class="form-control" id="per_foto" formControlName="per_foto">
+                            </div>  
+                            <div class="mb-3">
+                                <label for="per_estado" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="per_estado" formControlName="per_estado">
+                            </div>  
+                            <!-- Puedes agregar más contenido del formulario aquí -->
+                            <div class="mb-small">
+                                <button type="submit" class="btn me-small">Guardar</button>
+                                <button type="button" class="btn" (click)="reset()">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>    
+    
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th>NDI</th>
+                        <th>TipoDoc</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Tel</th>
+                        <th>Email</th>
+                        <th>Genero</th>
+                        <th>Foto</th>
+                        <th>Estado</th>
+                        <th>Accion</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let persona of personas">
+                        <td>{{ persona.per_documento }}</td>
+                        <td>{{ persona.per_tipodoc }}</td>
+                        <td>{{ persona.per_nombre }}</td>
+                        <td>{{ persona.per_apellido }}</td>
+                        <td>{{ persona.per_telefono }}</td>
+                        <td>{{ persona.per_email }}</td>
+                        <td>{{ persona.per_genero }}</td>
+                        <td>{{ persona.per_foto }}</td>
+                        <td>{{ persona.per_estado }}</td>
+                        <td>
+                            <div>
+                                <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" (click)="editPersona(persona)">Editar</button>
+                                <button type="button" class="btn btn-danger" (click)="deletePersona(persona)">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</body>
+</html>
+                

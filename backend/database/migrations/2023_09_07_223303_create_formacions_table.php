@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('formacions', function (Blueprint $table) {
-            $table->string('for_ficha')->primary();
+            $table->integer('for_ficha')->primary();
             $table->string('for_tipo');
             $table->string('for_nombre');
             $table->string('for_jornada');
