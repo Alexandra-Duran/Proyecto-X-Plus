@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('per_telefono');
             $table->string('per_email');
             $table->string('per_genero');
-            $table->string('per_foto');
             $table->string('per_estado');
             $table->timestamps();            
            

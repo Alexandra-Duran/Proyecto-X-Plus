@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <app-aside></app-aside>
+      <main id="main" class="main">
+
+        <div class="pagetitle">
+          <h1>Eventos</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <i class="bi bi-house"></i>
+              <li class="breadcrumb-item" ><a routerLink="/inicio">Home</a></li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
+    
+        <section class="section">
+          <div class="row">
+
+            <div class="col-lg-12">
+              <div class="container mt-4">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-primary">Search</button>
+                </div>
+            
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
+                <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="crearModalLabel">Formulario Usuario</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Contenido del formulario o lo que desees poner dentro del modal -->
+                                <!-- Ejemplo de formulario -->
+                                <form [formGroup]="eventoForm" (ngSubmit)="onSubmit()">
+                                    <!-- Agrega más campos según sea necesario -->
+                                    <div class="mb-3">
+                                        <label for="eve_tipo" class="form-label">Tipo de evento</label>
+                                        <input type="text" class="form-control" id="eve_tipo" formControlName="eve_tipo">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="eve_nombre" class="form-label">Nombre del evento</label>
+                                      <input type="text" class="form-control" id="eve_nombre" formControlName="eve_nombre" >
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="eve_area" class="form-label">Area</label>
+                                      <input type="text" class="form-control" id="eve_area" formControlName="eve_area" >
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="eve_fechainicio" class="form-label">Fecha Inicio</label>
+                                      <input type="datetime-local" class="form-control" id="eve_fechainicio" formControlName="eve_fechainicio" >
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="eve_fechafin" class="form-label">Fecha final</label>
+                                      <input type="datetime-local" class="form-control" id="eve_fechafin" formControlName="eve_fechafin" >
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="eve_estado" class="form-label">Estado</label>
+                                      <select class="form-control form-select" id="eve_estado" formControlName="eve_estado">
+                                          <option value="Activo">Activo</option>
+                                          <option value="Inactivo">Inactivo</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="usu_id" class="form-label">Selecciona una persona</label>
+                                      <select class="form-control form-select" id="usu_id" formControlName="usu_id" required >
+                                        <option *ngFor="let user of users" [value]="user.id">{{user.email}}</option>
+                                      </select>
+                                    </div>
+                                    <!-- Puedes agregar más contenido del formulario aquí -->
+                                    <div class="mb-small">
+                                        <button type="submit" class="btn me-small" data-bs-dismiss="modal">Guardar</button>
+                                        <button type="button" class="btn" (click)="reset()">Reset</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped shadow rounded">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Id</th>
+                                <th>Tipo evneto</th>
+                                <th>Nombre evento</th>
+                                <th>Area</th>
+                                <th>F. Inicio</th>
+                                <th>F. Fin</th>
+                                <th>Estado</th>
+                                <th>ID usuario</th>
+                                <th>Correo Usuario</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let evento of eventos">
+                                <td>{{ evento.id }}</td>
+                                <td>{{ evento.eve_tipo }}</td>
+                                <td>{{ evento.eve_nombre }}</td>
+                                <td>{{ evento.eve_area }}</td>
+                                <td>{{ evento.eve_fechainicio }}</td>
+                                <td>{{ evento.eve_fechafin }}</td>
+                                <td>{{ evento.eve_estado }}</td>         
+                                <td>{{ evento.usu_id }}</td>
+                                <td>{{ getNombreUser(evento.usu_id) }}</td>
+                                <td>
+                                    <div>
+                                        <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" data-bs-dismiss="modal" (click)="editEvento(evento)"><i class="bi bi-pencil-square"></i></button>
+                                        <button type="button" class="btn btn-danger" (click)="deleteEvento(evento)"><i class="bi bi-trash3-fill"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </section>
+    </main>
+  <app-footer></app-footer>
+</body>
+</html>

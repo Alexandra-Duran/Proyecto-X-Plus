@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <app-aside></app-aside>
+      <main id="main" class="main">
+
+        <div class="pagetitle">
+          <h1>Tipo de elementos</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <i class="bi bi-house"></i>
+              <li class="breadcrumb-item" ><a routerLink="/inicio">Home</a></li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
+    
+        <section class="section">
+          <div class="row">
+
+            <div class="col-lg-12">
+              <div class="container mt-4">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-primary">Search</button>
+                </div>
+            
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
+                <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="crearModalLabel">Formulario tipo elementos</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Contenido del formulario o lo que desees poner dentro del modal -->
+                                <!-- Ejemplo de formulario -->
+                                <form [formGroup]= "tipo_elementoForm" (ngSubmit)="onSubmit()">
+                                    <div class="mb-3">
+                                        <label for="tip_nombre" class="form-label">Nombre del elemento</label>
+                                        <input type="text" class="form-control" id="tip_nombre" formControlName="tip_nombre">
+                                    </div>
+                                    <!-- Agrega más campos según sea necesario -->
+                                    <div class="mb-3">
+                                        <label for="tip_descripcion" class="form-label">Descripción del elemento</label>
+                                        <input type="text" class="form-control" id="tip_descripcion" formControlName="tip_descripcion">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="tip:estado" class="form-label">Estado del elemento</label>
+                                        <select class="form-control form-select" id="tip_estado" formControlName="tip_estado">
+                                            <option value="Activo">Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
+                                        </select>
+                                    </div>
+                            
+                                    <!-- Puedes agregar más contenido del formulario aquí -->
+                                    <div class="mb-small">
+                                        <button type="submit" class="btn me-small btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                        <button type="button" class="btn" (click)="reset()">Reinicir</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Guardar</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>    
+            
+        
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped shadow rounded">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del elemento</th>
+                                <th>Descripción del elemento</th>
+                                <th>Estado del elemento</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tipo_elemento of tipo_elementos">
+                                <th>{{ tipo_elemento.id }}</th>
+                                <td>{{ tipo_elemento.tip_nombre }}</td>
+                                <td>{{ tipo_elemento.tip_descripcion }}</td>
+                                <td>{{ tipo_elemento.tip_estado }}</td>
+                                <td>
+                                    <div>
+                                        <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" (click)="editTipo_elemento(tipo_elemento)">Editar</button>
+                                        <button type="button" class="btn btn-danger" (click)="deleteTipo_elemento(tipo_elemento)">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+            </div><!-- End Left side columns -->
+    
+            <!-- Right side columns -->
+            <!-- <div class="col-lg-4"> 
+                
+            </div> -->
+    
+          </div>
+        </section>
+    </main>
+  <app-footer></app-footer>
+</body>
+</html>

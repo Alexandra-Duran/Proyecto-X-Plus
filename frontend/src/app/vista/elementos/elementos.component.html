@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <app-aside></app-aside>
+      <main id="main" class="main">
+
+        <div class="pagetitle">
+          <h1>Elementos</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <i class="bi bi-house"></i>
+              <li class="breadcrumb-item" ><a routerLink="/inicio">Home</a></li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
+    
+        <section class="section">
+          <div class="row">
+
+            <div class="col-lg-12">
+              
+              <div class="container mt-4">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-primary">Search</button>
+                </div>
+                <!-- BOTON QUE ABRE EL MODAL PARA CREAR UNA PERSONA -->
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
+                <!-- MODAL PARA GUARADAR Y EDITAR LA PERSONA -->
+                <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="crearModalLabel">Formulario Persona</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Contenido del formulario o lo que desees poner dentro del modal -->
+                                <!-- Ejemplo de formulario -->
+                                <form [formGroup]="elementoForm" (ngSubmit)="onSubmit()">
+                                    <div class="mb-3">
+                                        <label for="ele_serial" class="form-label">Identificador</label>
+                                        <input type="text" class="form-control" id="ele_serial" formControlName="ele_serial">
+                                    </div>
+                                    <!-- Agrega más campos según sea necesario -->
+                                    <div class="mb-3">
+                                        <label for="ele_tipo" class="form-label">Tipo</label>
+                                        <select class="form-control form-select" id="ele_tipo" formControlName="ele_tipo">
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Portatil">Portatil</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ele_marca" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="ele_marca" formControlName="ele_marca">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ele_modelo" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="ele_modelo" formControlName="ele_modelo">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ele_color" class="form-label">Color</label>
+                                        <input type="text" class="form-control" id="ele_color" formControlName="ele_color">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ele_foto" class="form-label">Foto</label>
+                                        <input type="file" class="form-control" id="ele_foto" formControlName="ele_foto">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="ele_observacion" class="form-label">Observacion</label>
+                                      <input type="text" class="form-control" id="ele_observacion" formControlName="ele_observacion">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ele_estado" class="form-label">Estado</label>
+                                        <select class="form-control form-select" id="ele_estado" formControlName="ele_estado">
+                                            <option value="Activo">Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="per_id" class="form-label">Selecciona una persona</label>
+                                      <select class="form-control form-select" id="per_id" formControlName="per_id" required >
+                                        <option *ngFor="let persona of personas" [value]="persona.per_documento">{{persona.per_nombre}}</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="tip_id" class="form-label">Selecciona el tipo de elemento</label>
+                                      <select class="form-control form-select" id="tip_id" formControlName="tip_id" required >
+                                        <option *ngFor="let tipo_elemento of tipo_elementos" [value]="tipo_elemento.id">{{tipo_elemento.tip_nombre}}</option>
+                                      </select>
+                                    </div>   
+                                    <!-- Puedes agregar más contenido del formulario aquí -->
+                                    <div class="mb-small">
+                                        <button type="submit" class="btn me-small" data-bs-dismiss="modal">Guardar</button>
+                                        <button type="button" class="btn" (click)="reset()">Reset</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <!-- TABLA DONDE MUESTRA LOS DATOS -->
+                  <div class="row m-0- d-flex ">
+                    <div class="col-4" *ngFor="let elemento of elementos">
+                      <div class="card shadow rounded">
+
+                        <img src="{{ elemento.ele_foto}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ elemento.ele_tipo }}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Identificador: {{ elemento.ele_serial }}</li>
+                          <li class="list-group-item">Marca: {{ elemento.ele_marca }}</li>
+                          <li class="list-group-item">Modelo: {{ elemento.ele_modelo }}</li>
+                          <li class="list-group-item">Color: {{ elemento.ele_color }}</li>
+                          <li class="list-group-item">Foto: {{ elemento.ele_foto }}</li>
+                          <li class="list-group-item">Observacion: {{ elemento.ele_observacion }}</li>
+                          <li class="list-group-item">Estado: {{ elemento.ele_estado }}</li>
+                          <li class="list-group-item">Id persona: {{ elemento.per_id }}</li>
+                          <li class="list-group-item">Id tipo elemento: {{ elemento.tip_id }}</li>
+                        </ul>
+                        <div class="card-body">
+                          <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" data-bs-dismiss="modal" (click)="editElemento(elemento)"><i class="bi bi-pencil-square"></i></button>
+                          <button type="button" class="btn btn-danger" (click)="deleteElemento(elemento)"><i class="bi bi-trash3-fill"></i></button>
+                        </div>
+                      </div>
+                    </div>
+  
+                  </div>
+                
+            </div>
+
+            </div>
+    
+          </div>
+        </section>
+    </main>
+  <app-footer></app-footer>
+</body>
+</html>

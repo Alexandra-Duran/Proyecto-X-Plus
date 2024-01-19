@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\cargo;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class CargoController extends Controller
     public function index()
     {
         //
+        $cargos = cargo::all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => $cargos
+        ]);
     }
 
     /**
@@ -29,12 +37,25 @@ class CargoController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'car_nombre' => 'required',
+            'car_descripcion' => 'required',
+            'car_estado' => 'required'
+        ]);
+
+        $cargo = cargo::create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => $cargo
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(cargo $cargo)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +63,7 @@ class CargoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(cargo $cargo)
+    public function edit(string $id)
     {
         //
     }
@@ -53,6 +74,19 @@ class CargoController extends Controller
     public function update(Request $request, cargo $cargo)
     {
         //
+        $request->validate([
+            'car_nombre' => 'required',
+            'car_descripcion' => 'required',
+            'car_estado' => 'required'
+        ]);
+
+        $cargo->update($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => $cargo
+        ]);
     }
 
     /**
@@ -61,5 +95,12 @@ class CargoController extends Controller
     public function destroy(cargo $cargo)
     {
         //
+        $cargo->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => null
+        ]);
     }
 }

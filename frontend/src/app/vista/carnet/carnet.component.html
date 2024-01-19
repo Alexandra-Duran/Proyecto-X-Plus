@@ -1,28 +1,74 @@
-<div class="row">
-    <div class="col-xs12 col-sm12 col-md-12 col-lg-12">
-        <app-navbar></app-navbar>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <app-aside></app-aside>
+      <main id="main" class="main">
 
-</div>
-<div claas="row">
-    <div class="col col-xs-2 col-sm-3 col-md-4 col-lg-3 mt-2">
-        <app-menu></app-menu>
-    </div>
-    <div class="col col-xs-6 col-sm-7 col-md-6 col-lg-9">
-        <div class="card position-relative" style="width: 18rem; top: 50%; left: 65%; transform: translate(-50%, -70%);">
-            <img src="assets/img/img4.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <img src="" alt="Código QR">
-              <p class="card-text">Centro de industria y construcción</p>
-            </div>
+        <div class="pagetitle">
+          <h1>Carnet</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <i class="bi bi-house"></i>
+              <li class="breadcrumb-item" ><a routerLink="/inicio">Home</a></li>
+            </ol>
+          </nav>
         </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col col-xs-2 col-sm-3 col-md-3 col-lg-9">
-        <app-footer></app-footer>
-    </div>
-
-</div>
+    
+        <section class="section">
+          <div class="row">
+            <div class="container text-center">
+              <div class="row">
+                <div class=" col-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="card">
+                    <img src="assets/img/logosena.jpg" class="card-img-top logo-img" alt="...">
+                    <br>
+                    <br>
+                    <div class="card-body">
+                      <img src="assets/img/QR.jpg" class="align-items-center">
+                      <p class="card-text texto">SENA CENTRO DE INDUSTRIA Y CONSTRUCCIÓN</p>
+                    </div>
+                  </div>  
+                </div>
+                
+                <div class=" col-12 col-sm-12 col-md-6 col-lg-6 formcolor"> 
+                  <!-- Formulario al lado de la card -->
+                  <!-- <div class="container">
+                    <form class="form-inline">
+                      <div class="form-group mr-2">
+                        <label for="nombre" class="mr-2">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                      </div>
+                      <div class="form-group mr-2">
+                        <label for="apellido" class="mr-2">Apellido:</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido">
+                      </div>
+                      <div class="form-group mr-2">
+                        <label for="email" class="mr-2">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                      </div>
+                      <div class="form-group mr-2">
+                        <label for="telefono" class="mr-2">Teléfono:</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono">
+                      </div>
+                      <div class="form-group mr-2">
+                        <label for="telefono2" class="mr-2">Teléfono 2:</label>
+                        <input type="tel" class="form-control" id="telefono2" name="telefono2">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </main>
+  <app-footer></app-footer>
+</body>
+</html>

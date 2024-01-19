@@ -15,9 +15,9 @@ return new class extends Migration
             $table->integer('for_ficha')->primary();
             $table->string('for_tipo');
             $table->string('for_nombre');
-            $table->string('for_jornada');
-            $table->date('for_fechainicio');
-            $table->date('for_fechafin');
+            // $table->string('for_jornada');
+            // $table->date('for_fechainicio');
+            // $table->date('for_fechafin');
             $table->string('for_estado');
             $table->timestamps();
         });

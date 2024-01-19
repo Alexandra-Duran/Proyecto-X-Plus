@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\tipo_elemento;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,14 @@ class TipoElementoController extends Controller
     public function index()
     {
         //
+        $tipo_elementos = tipo_elemento::all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '¡Exito!',
+            'data' => $tipo_elementos
+
+        ]);
     }
 
     /**
@@ -28,13 +37,25 @@ class TipoElementoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'tip_nombre' => 'required',
+        'tip_descripcion' => 'required',
+        'tip_estado' => 'required'
+        ]);
+
+        $tipo_elemento = tipo_elemento::create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '¡Exito!',
+            'data' => $tipo_elemento
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(tipo_elemento $tipo_elemento)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +63,7 @@ class TipoElementoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(tipo_elemento $tipo_elemento)
+    public function edit(string $id)
     {
         //
     }
@@ -52,7 +73,19 @@ class TipoElementoController extends Controller
      */
     public function update(Request $request, tipo_elemento $tipo_elemento)
     {
-        //
+        $request->validate([
+            'tip_nombre' => 'required',
+            'tip_descripcion' => 'required',
+            'tip_estado' => 'required'
+        ]);
+    
+            $tipo_elemento->update($request->all());
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => '¡Exito!',
+                'data' => $tipo_elemento
+            ]);
     }
 
     /**
@@ -60,6 +93,12 @@ class TipoElementoController extends Controller
      */
     public function destroy(tipo_elemento $tipo_elemento)
     {
-        //
+        $tipo_elemento->delete();
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => '¡Exito!',
+            'data' => null
+        ]);
     }
 }

@@ -11,8 +11,10 @@ export class PersonasComponent implements OnInit {
   error:string = '';
   success:string = '';
 
+  // query: string= '';
   personas:any[] = [];
   per_documento:any = null;
+  
 
   personaForm = new FormGroup({
     per_documento: new FormControl(''),
@@ -22,7 +24,6 @@ export class PersonasComponent implements OnInit {
     per_telefono: new FormControl(''),
     per_email: new FormControl(''),
     per_genero: new FormControl(''),
-    per_foto: new FormControl(''),
     per_estado: new FormControl('')
     
   });
@@ -30,6 +31,7 @@ export class PersonasComponent implements OnInit {
   constructor (
     private httpClient : HttpClient
   ) {}
+
 
   ngOnInit(): void {
     this.getPersonaList();
@@ -41,6 +43,10 @@ export class PersonasComponent implements OnInit {
         this.personas = response.data;
     })
   }
+  // onBuscar(): void {
+  //   this.httpClient.get<any[]>(`http://127.0.0.1:8000/api/personas/${this.query}`)
+  //     .subscribe(resultados => this.personas = resultados);
+  // }
 
   onSubmit () {
     this.error = '';
@@ -82,7 +88,6 @@ export class PersonasComponent implements OnInit {
       per_telefono: persona.per_telefono,
       per_email: persona.per_email,
       per_genero: persona.per_genero,
-      per_foto: persona.per_foto,
       per_estado: persona.per_estado
     });
   }
@@ -110,8 +115,8 @@ export class PersonasComponent implements OnInit {
       per_telefono: (''),
       per_email: (''),
       per_genero: (''),
-      per_foto: (''),
       per_estado: ('')
     });
   }
+
 }

@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ficha_aprendizs', function (Blueprint $table) {
-            $table->id();
+            $table->string('fic_ficha')->primary();
+            $table->string('fic_jornada');
+            $table->date('fic_fechainicio');
+            $table->date('fic_fechafin');
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
             $table->integer('ficha_for');

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <app-aside></app-aside>
+      <main id="main" class="main">
+
+        <div class="pagetitle">
+          <h1>Fichas</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <i class="bi bi-house"></i>
+              <li class="breadcrumb-item" ><a routerLink="/inicio">Home</a></li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
+    
+        <section class="section">
+          <div class="row">
+
+            <div class="col-lg-12">
+                <div class="container mt-4">
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="button" class="btn btn-outline-primary">Search</button>
+                    </div>
+            
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
+                    <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="crearModalLabel">Formulario Formacions</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Contenido del formulario o lo que desees poner dentro del modal -->
+                                    <!-- Ejemplo de formulario -->
+                                    <form [formGroup]="ficha_aprendizForm" (ngSubmit)="onSubmit()">
+                                        <div class="mb-3">
+                                            <label for="fic_ficha" class="form-label">Ficha</label>
+                                            <input type="number" class="form-control" id="fic_ficha" formControlName="fic_ficha">
+                                        </div>                                                                              
+                                        <div class="mb-3">
+                                            <label for="fic_jornada" class="form-label">Jornada</label>
+                                            <select class="form-control form-select" id="fic_jornada" formControlName="fic_jornada">
+                                                <option value="Mañana">Mañana</option>
+                                                <option value="Tarde">Tarde</option>
+                                                <option value="Noche">Noche</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="fic_fechainicio" class="form-label">Fecha inicio</label>
+                                            <input type="date" class="form-control" id="fic_fechainicio" formControlName="fic_fechainicio">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="fic_fechafin" class="form-label">Fecha fin</label>
+                                            <input type="date" class="form-control" id="fic_fechafin" formControlName="fic_fechafin">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="users_id" class="form-label">Selecciona una persona</label>
+                                            <select class="form-control form-select" id="users_id" formControlName="users_id" required>
+                                                <option *ngFor="let user of users" [value]="user.id">{{user.email}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="ficha_for" class="form-label">Selecciona la formacion</label>
+                                            <select class="form-control form-select" id="ficha_for" formControlName="ficha_for" required>
+                                            <option *ngFor="let formacion of formacions" [value]="formacion.for_ficha">{{formacion.for_nombre}}</option>
+                                            </select>
+                                        </div>  
+                                        <!-- Puedes agregar más contenido del formulario aquí -->
+                                        <div class="mb-small">
+                                            <button type="submit" class="btn me-small btn-secondary" data-bs-dismiss="modal">Guardar</button>
+                                            <button type="button" class="btn" (click)="reset()">Reset</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>    
+            
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped shadow rounded">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Ficha</th>
+                                    <th>Jornada</th>
+                                    <th>F. inicio</th>
+                                    <th>F. fin</th>
+                                    <th>ID usuario</th>
+                                    <th>Usuario</th>
+                                    <th>ID formacion</th>
+                                    <th>Nombre formacion</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ficha_aprendiz of ficha_aprendizs">
+                                    <td>{{ ficha_aprendiz.fic_ficha }}</td>
+                                    <td>{{ ficha_aprendiz.fic_jornada }}</td>
+                                    <td>{{ ficha_aprendiz.fic_fechainicio }}</td>
+                                    <td>{{ ficha_aprendiz.fic_fechafin }}</td>
+                                    <td>{{ ficha_aprendiz.users_id }}</td>
+                                    <td>{{ getNombreUser(ficha_aprendiz.users_id) }}</td>
+                                    <td>{{ ficha_aprendiz.ficha_for }}</td>
+                                    <td>{{ getNombreFormacion(ficha_aprendiz.ficha_for) }}</td>
+                                    <td>
+                                        <div>
+                                            <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" (click)="editFicha_aprendiz(ficha_aprendiz)"><i class="bi bi-pencil-square"></i></button>
+                                            <button type="button" class="btn btn-danger" (click)="deleteFicha_aprendiz(ficha_aprendiz)"><i class="bi bi-trash3-fill"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
+            </div>
+          </div>
+        </section>
+      </main>
+  <app-footer></app-footer>
+</body>
+</html>

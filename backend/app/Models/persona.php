@@ -20,9 +20,10 @@ class persona extends Model
         'per_telefono',
         'per_email',
         'per_genero',
-        'per_foto',
         'per_estado'
     ];
 
     protected $primaryKey = 'per_documento'; //Agg esta linea cuando el campo primario no es llamado por defecto id como lo llama Laravel
+    protected $keyType = 'string';
+
 }

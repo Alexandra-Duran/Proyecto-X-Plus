@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\ficha_aprendiz;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,12 @@ class FichaAprendizController extends Controller
     public function index()
     {
         //
+        $ficha_aprendizs = ficha_aprendiz::all();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => $ficha_aprendizs
+        ]);
     }
 
     /**
@@ -29,12 +36,28 @@ class FichaAprendizController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'fic_ficha' => 'required',
+            'fic_jornada' => 'required',
+            'fic_fechainicio' => 'required',
+            'fic_fechafin' => 'required',
+            'users_id' => 'required',
+            'ficha_for' => 'required'
+        ]);
+
+        $ficha_aprendiz = ficha_aprendiz::create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => $ficha_aprendiz
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ficha_aprendiz $ficha_aprendiz)
+    public function show(string $fic_ficha)
     {
         //
     }
@@ -42,7 +65,7 @@ class FichaAprendizController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ficha_aprendiz $ficha_aprendiz)
+    public function edit(string $fic_ficha)
     {
         //
     }
@@ -53,6 +76,22 @@ class FichaAprendizController extends Controller
     public function update(Request $request, ficha_aprendiz $ficha_aprendiz)
     {
         //
+        $request->validate([
+            'fic_ficha' => 'required',
+            'fic_jornada' => 'required',
+            'fic_fechainicio' => 'required',
+            'fic_fechafin' => 'required',
+            'users_id' => 'required',
+            'ficha_for' => 'required'
+        ]);
+
+        $ficha_aprendiz->update($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'data' => $ficha_aprendiz
+        ]);
     }
 
     /**
@@ -61,5 +100,12 @@ class FichaAprendizController extends Controller
     public function destroy(ficha_aprendiz $ficha_aprendiz)
     {
         //
+        $ficha_aprendiz->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Exito!',
+            'date' => null
+        ]);
     }
 }

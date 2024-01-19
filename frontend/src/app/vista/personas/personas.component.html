@@ -6,116 +6,142 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container mt-4">
-        <div class="input-group mb-3">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <button type="button" class="btn btn-outline-primary">Search</button>
+    <app-navbar></app-navbar>
+    <app-aside></app-aside>
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+          <h1>Personas</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <i class="bi bi-house"></i>
+              <li class="breadcrumb-item" ><a routerLink="/inicio">Home</a></li>
+            </ol>
+          </nav>
         </div>
     
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
-        <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="crearModalLabel">Formulario Persona</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <section class="section">
+          <div class="row">
+
+            <div class="col-lg-12">
+                <div class="container mt-4">
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+                        <button type="button" class="btn btn-outline-primary">Search</button>
                     </div>
-                    <div class="modal-body">
-                        <!-- Contenido del formulario o lo que desees poner dentro del modal -->
-                        <!-- Ejemplo de formulario -->
-                        <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
-                            <div class="mb-3">
-                                <label for="per_documento" class="form-label">NDI</label>
-                                <input type="number" class="form-control" id="per_documento" formControlName="per_documento">
+                    <!-- BOTON QUE ABRE EL MODAL PARA CREAR UNA PERSONA -->
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#crearModal">CREAR</button>
+                    <!-- MODAL PARA GUARADAR Y EDITAR LA PERSONA -->
+                    <div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="crearModalLabel">Formulario Persona</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Contenido del formulario o lo que desees poner dentro del modal -->
+                                    <!-- Ejemplo de formulario -->
+                                    <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+                                        <div class="mb-3">
+                                            <label for="per_documento" class="form-label">NDI</label>
+                                            <input type="number" class="form-control" id="per_documento" formControlName="per_documento">
+                                        </div>
+                                        <!-- Agrega más campos según sea necesario -->
+                                        <div class="mb-3">
+                                            <label for="per_tipodoc" class="form-label">Tipo Documento</label>
+                                            <select class="form-control form-select" id="per_tipodoc" formControlName="per_tipodoc">
+                                                <option value="CC">Cedula de ciudadania</option>
+                                                <option value="TI">Trajeta de identidad</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="per_nombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="per_nombre" formControlName="per_nombre">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="per_apellido" class="form-label">Apellidos</label>
+                                            <input type="text" class="form-control" id="per_apellido" formControlName="per_apellido">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="per_telefono" class="form-label">Tel</label>
+                                            <input type="number" class="form-control" id="per_telefono" formControlName="per_telefono">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="per_email" class="form-label">Correo</label>
+                                            <input type="email" class="form-control" id="per_email" formControlName="per_email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="per_genero" class="form-label">Genero</label>
+                                            <select class="form-control form-select" id="per_genero" formControlName="per_genero">
+                                                <option value="F">Femenino</option>
+                                                <option value="M">Masculino</option>
+                                            </select>
+                                        </div> 
+                                        <div class="mb-3">
+                                            <label for="per_estado" class="form-label">Estado</label>
+                                            <select class="form-control form-select" id="per_estado" formControlName="per_estado">
+                                                <option value="Activo">Activo</option>
+                                                <option value="Inactivo">Inactivo</option>
+                                            </select>
+                                        </div>  
+                                        <!-- Puedes agregar más contenido del formulario aquí -->
+                                        <div class="mb-small">
+                                            <button type="submit" class="btn me-small" data-bs-dismiss="modal">Guardar</button>
+                                            <button type="button" class="btn" (click)="reset()">Reset</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                </div> -->
                             </div>
-                            <!-- Agrega más campos según sea necesario -->
-                            <div class="mb-3">
-                                <label for="per_tipodoc" class="form-label">Tipo Doc</label>
-                                <input type="text" class="form-control" id="per_tipodoc" formControlName="per_tipodoc">
-                            </div>
-                            <div class="mb-3">
-                                <label for="per_nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="per_nombre" formControlName="per_nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="per_apellido" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="per_apellido" formControlName="per_apellido">
-                            </div>
-                            <div class="mb-3">
-                                <label for="per_telefono" class="form-label">Tel</label>
-                                <input type="number" class="form-control" id="per_telefono" formControlName="per_telefono">
-                            </div>
-                            <div class="mb-3">
-                                <label for="per_email" class="form-label">Correo</label>
-                                <input type="email" class="form-control" id="per_email" formControlName="per_email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="per_genero" class="form-label">Genero</label>
-                                <input type="text" class="form-control" id="per_genero" formControlName="per_genero">
-                            </div>
-                            <div class="mb-3">
-                                <label for="per_foto" class="form-label">Foto</label>
-                                <input type="text" class="form-control" id="per_foto" formControlName="per_foto">
-                            </div>  
-                            <div class="mb-3">
-                                <label for="per_estado" class="form-label">Estado</label>
-                                <input type="text" class="form-control" id="per_estado" formControlName="per_estado">
-                            </div>  
-                            <!-- Puedes agregar más contenido del formulario aquí -->
-                            <div class="mb-small">
-                                <button type="submit" class="btn me-small">Guardar</button>
-                                <button type="button" class="btn" (click)="reset()">Reset</button>
-                            </div>
-                        </form>
+                        </div>
+                    </div>    
+                    <!-- TABLA DONDE MUESTRA LOS DATOS -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped shadow rounded">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>NDI</th>
+                                    <th>T.D</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Tel</th>
+                                    <th>Email</th>
+                                    <th>Genero</th>
+                                    <th>Estado</th>
+                                    <th>Accion</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let persona of personas">
+                                    <td>{{ persona.per_documento }}</td>
+                                    <td>{{ persona.per_tipodoc }}</td>
+                                    <td>{{ persona.per_nombre }}</td>
+                                    <td>{{ persona.per_apellido }}</td>
+                                    <td>{{ persona.per_telefono }}</td>
+                                    <td>{{ persona.per_email }}</td>
+                                    <td>{{ persona.per_genero }}</td>
+                                    <td>{{ persona.per_estado }}</td>
+                                    <td>
+                                        <div>
+                                            <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" data-bs-dismiss="modal" (click)="editPersona(persona)"><i class="bi bi-pencil-square"></i></button>
+                                            <button type="button" class="btn btn-danger" (click)="deletePersona(persona)"><i class="bi bi-trash3-fill"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                    </div> -->
                 </div>
             </div>
-        </div>    
-    
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-primary">
-                    <tr>
-                        <th>NDI</th>
-                        <th>TipoDoc</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Tel</th>
-                        <th>Email</th>
-                        <th>Genero</th>
-                        <th>Foto</th>
-                        <th>Estado</th>
-                        <th>Accion</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let persona of personas">
-                        <td>{{ persona.per_documento }}</td>
-                        <td>{{ persona.per_tipodoc }}</td>
-                        <td>{{ persona.per_nombre }}</td>
-                        <td>{{ persona.per_apellido }}</td>
-                        <td>{{ persona.per_telefono }}</td>
-                        <td>{{ persona.per_email }}</td>
-                        <td>{{ persona.per_genero }}</td>
-                        <td>{{ persona.per_foto }}</td>
-                        <td>{{ persona.per_estado }}</td>
-                        <td>
-                            <div>
-                                <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#crearModal" (click)="editPersona(persona)">Editar</button>
-                                <button type="button" class="btn btn-danger" (click)="deletePersona(persona)">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>    
+          </div>
+        </section>
+      </main>
+    <app-footer></app-footer>
 </body>
 </html>
                 

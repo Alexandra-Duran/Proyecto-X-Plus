@@ -13,6 +13,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
+
         $persona = persona::all();
 
         return response()->json([
@@ -21,7 +22,7 @@ class PersonaController extends Controller
             'data' => $persona
         ]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -43,7 +44,6 @@ class PersonaController extends Controller
             'per_telefono' => 'required',
             'per_email' => 'required',
             'per_genero' => 'required',
-            'per_foto' => 'required',
             'per_estado' => 'required'
         ]);
 
@@ -86,8 +86,7 @@ class PersonaController extends Controller
             'per_telefono' => 'required',
             'per_email' => 'required',
             'per_genero' => 'required',
-            'per_foto' => 'required',
-            // 'per_estado' => 'required'
+            'per_estado' => 'required'
         ]);
 
         $persona->update($request->all());
@@ -113,5 +112,13 @@ class PersonaController extends Controller
             'message' => 'Exito!',
             'data' => null
         ]);
+    }
+    
+    public function buscar(Request $request)
+    {
+        $query = $request->get('q');
+        $resultados = persona::where('per_nombre', 'like', "%$query%")->get();
+
+        return response()->json($resultados);
     }
 }
